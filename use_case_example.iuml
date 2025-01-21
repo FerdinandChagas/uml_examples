@@ -3,7 +3,6 @@ left to right direction
 
 :Cliente: as cliente
 
-
 rectangle "Sistema de Ingressos"{
     (Realizar Cadastro) as realizar_cadastro
     (Realizar Login) as realizar_login

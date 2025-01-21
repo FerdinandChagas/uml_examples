@@ -1,0 +1,43 @@
+@startuml "Gerenciamento de Pedidos"
+left to right direction
+:Restaurante: as restaurante
+:Cliente: as cliente
+:Serviço Pagamentos: as servico_pagamentos
+
+rectangle "Gerenciamento de Pedidos"{
+    (Visualizar Cardápio) as visualizar_cardapio
+    (Visualizar Carrinho) as visualizar_carrinho
+    (Acompanhar Pedidos) as acompanhar_pedidos
+    (Selecionar Itens) as selecionar_itens
+    (Finalizar Compra) as finalizar_compra
+    (Cancelar Compra) as cancelar_compra
+    (Definir Pagamento) as definir_pagamento
+    (Confirmar Entrega) as confirmar_entrega
+
+    (Visualizar Pedidos) as visualizar_pedidos
+    (Confirmar Pedido) as confirmar_pedido
+    (Confirmar Preparo) as confirmar_preparo
+    (Cancelar Pedido) as cancelar_pedido
+    (Notificar Entrega) as notificar_entrega
+}
+
+cliente --> visualizar_cardapio
+cliente --> visualizar_carrinho
+cliente --> acompanhar_pedidos
+cliente --> confirmar_entrega
+
+visualizar_cardapio <.. selecionar_itens: <<extend>> 
+visualizar_carrinho <.. finalizar_compra: <<extend>>
+visualizar_carrinho <.. cancelar_compra: <<extend>>
+finalizar_compra ..> definir_pagamento: <<include>>
+
+
+restaurante --> visualizar_pedidos
+restaurante --> notificar_entrega
+visualizar_pedidos <.. confirmar_pedido: <<extend>>
+visualizar_pedidos <.. cancelar_pedido: <<extend>>
+visualizar_pedidos <.right. confirmar_preparo: <<extend>>
+
+servico_pagamentos -up-> definir_pagamento
+
+@enduml
