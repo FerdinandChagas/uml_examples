@@ -1,0 +1,37 @@
+@startuml
+left to right direction 
+
+:Cliente: as cliente
+:Loja: as loja
+:Correios: as correios
+
+rectangle "Gerenciamento de Encomendas"{
+    (Cadastrar Encomenda) as cadastrar_encomenda
+    (Buscar Encomenda) as buscar_encomenda
+    (Listar Encomendas) as listar_encomendas
+    (Remover Encomendas) as remover_encomendas
+    (Atualizar Encomendas) as atualizar_encomendas
+    (Calcular Frete) as calcular_frete
+    (Calcular Prazo) as calcular_prazo
+    (Registrar Devolução) as registrar_devolucao
+}
+
+loja --> cadastrar_encomenda
+loja --> buscar_encomenda
+loja --> listar_encomendas
+loja --> atualizar_encomendas
+loja --> remover_encomendas
+
+cliente --> listar_encomendas
+cliente --> registrar_devolucao
+
+correios -up-> atualizar_encomendas
+correios -up-> buscar_encomenda
+correios -up-> listar_encomendas
+correios -up-> calcular_frete
+correios -up-> calcular_prazo
+
+cadastrar_encomenda ..> calcular_frete: <<extend>>
+cadastrar_encomenda ..> calcular_prazo: <<extend>>
+
+@enduml

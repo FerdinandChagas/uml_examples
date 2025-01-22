@@ -1,0 +1,30 @@
+@startuml
+left to right direction
+
+:Cliente: as cliente
+:Loja: as loja
+:Correios: as correios
+
+rectangle "Gerenciamento do Rastreamento"{
+    (Buscar Código) as buscar_codigo
+    (Cadastrar Entrega) as cadastrar_entrega
+    (Atualizar Estoque) as atualizar_estoque
+    (Gerar Código) as gerar_codigo
+    (Atualizar Rastreamento) as atualizar_rastreamento
+    (Listar Códigos) as listar_codigos
+    (Remover Código) as remover_codigo
+    (Acompanhar Rastreamento) as acompanhar_rastreamento
+}
+
+correios --> cadastrar_entrega
+correios --> atualizar_rastreamento
+correios --> listar_codigos
+correios --> remover_codigo
+correios --> buscar_codigo
+
+cliente -down-> acompanhar_rastreamento
+loja --> acompanhar_rastreamento
+
+cadastrar_entrega ..> gerar_codigo: <<include>>
+cadastrar_entrega ..> atualizar_estoque: <<include>>
+@enduml
