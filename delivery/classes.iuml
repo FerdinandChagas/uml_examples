@@ -1,0 +1,82 @@
+@startuml
+
+class Restaurante{
+    nome
+    endereco
+    telefone
+    cnpj
+    cardapio
+    horario_funcionamento
+    funcionarios
+    cadastrar_cardapio()
+    aceitar_pedido()
+    monitorar_pedido()
+    finalizar_pedido()
+    cancelar_pedido()
+}
+
+class Cardapio{
+    lista_itens
+    data_cadastro
+    buscar_item()
+    filtrar_itens()
+}
+
+class Item{
+    nome
+    descricao
+    preco
+    cadastrar_item()
+    remover_item()
+    atualizar_item()
+}
+
+class ItemPedido{
+    item
+    quantidade
+    definir_quantidade()
+}
+
+class Pedido{
+    lista_itens_pedidos
+    valor_total
+    hora
+    cliente
+    pagamento
+    status
+    adicionar_item()
+    remover_item()
+    atualizar_status()
+}
+
+class Cliente{
+    nome
+    endereco
+    telefone
+    cpf
+    rg
+    historico_pedidos
+}
+
+class Entrega{
+    status
+    pedido
+    entregador
+    atualizar_status()
+}
+
+class Pagamento{
+    forma_pagamento
+    valor
+    data_pagamento
+}
+
+Cardapio "1"*--"1..*" Item: possui >
+Pedido "1"*--"1..*" ItemPedido: possui >
+ItemPedido "1"-up-"1" Item: possui >
+Entrega "1"-left-"1" Pedido: possui > 
+Cliente "1..*"--"1..*" Pedido: faz >
+(Cliente, Pedido) .. Pagamento
+Restaurante "1"-left-"1..*" Cardapio: possui >
+Restaurante "1"-down-"0..*" Pedido: gerencia >
+@enduml

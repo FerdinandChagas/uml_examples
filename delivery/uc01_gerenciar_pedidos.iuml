@@ -9,15 +9,15 @@ rectangle "Gerenciamento de Pedidos"{
     (Visualizar Carrinho) as visualizar_carrinho
     (Acompanhar Pedidos) as acompanhar_pedidos
     (Selecionar Itens) as selecionar_itens
-    (Finalizar Compra) as finalizar_compra
-    (Cancelar Compra) as cancelar_compra
+    (Finalizar Pedido) as finalizar_pedido
+    (Cancelar Pedido) as cancelar_pedido
     (Definir Pagamento) as definir_pagamento
     (Confirmar Entrega) as confirmar_entrega
 
     (Visualizar Pedidos) as visualizar_pedidos
     (Confirmar Pedido) as confirmar_pedido
     (Confirmar Preparo) as confirmar_preparo
-    (Cancelar Pedido) as cancelar_pedido
+    (Cancelar Pedido) as cancelar_meu_pedido
     (Notificar Entrega) as notificar_entrega
 }
 
@@ -27,9 +27,9 @@ cliente --> acompanhar_pedidos
 cliente --> confirmar_entrega
 
 visualizar_cardapio <.. selecionar_itens: <<extend>> 
-visualizar_carrinho <.. finalizar_compra: <<extend>>
-visualizar_carrinho <.. cancelar_compra: <<extend>>
-finalizar_compra ..> definir_pagamento: <<include>>
+visualizar_carrinho <.. finalizar_pedido: <<extend>>
+visualizar_carrinho <.. cancelar_meu_pedido: <<extend>>
+finalizar_pedido ..> definir_pagamento: <<include>>
 
 
 restaurante --> visualizar_pedidos
