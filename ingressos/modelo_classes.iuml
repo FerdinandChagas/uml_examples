@@ -1,0 +1,103 @@
+@startuml
+left to right direction
+
+class Ingresso{
+    id
+    valor
+    evento
+    cliente
+    lote
+    data_emissao
+    data_evento
+    setor
+    situacao
+    realizar_reembolso()
+    realizar_compra()
+    realizar_validacao()
+}
+
+class Evento{
+    id
+    nome
+    local
+    horario
+    data
+    qnt_maxima
+    tipo
+    lotes
+    ingressos_vendidos
+    situacao
+    motivo_cancelamento
+    motivo_adiamento
+    organizador
+    listar_clientes()
+    cadastrar_evento()
+    atualizar_evento()
+    remover_evento()
+    listar_eventos()
+}
+
+
+class Cliente{
+    id
+    nome
+    telefone
+    email
+    cpf
+    ingressos
+    cadastrar_cliente()
+    atualizar_cliente()
+    remover_cliente()
+    listar_clientes()
+}
+
+class Organizador{
+    id
+    nome
+    email
+    telefone
+    eventos
+    cpf_cnpj
+    cadastrar_organizador()
+    atualizar_organizador()
+    remove_organizador()
+    listar_organizadores()
+}
+
+class Lote{
+    id
+    quantidade_ingressos
+    data_inicio
+    data_fim
+    valor
+}
+
+class Local{
+    id
+    nome
+    endereco
+    capacidade_max
+    tipo
+    agenda_eventos
+    cadastrar_local()
+    atualizar_local()
+    remover_local()
+    listar_locais()
+}
+
+Ingresso -- Evento
+Ingresso -- Cliente
+Ingresso -- Lote
+
+Evento -- Cliente
+Evento -- Organizador
+Evento -- Lote
+Evento -- Local 
+
+Organizador -- Evento
+
+Local -- Ingresso
+
+
+
+@enduml
