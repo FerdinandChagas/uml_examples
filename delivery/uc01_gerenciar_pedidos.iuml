@@ -6,7 +6,7 @@ left to right direction
 
 rectangle "Gerenciamento de Pedidos"{
     (Visualizar Cardápio) as visualizar_cardapio
-    (Visualizar Carrinho) as visualizar_carrinho
+    (Visualizar Pedido) as visualizar_pedido
     (Acompanhar Pedidos) as acompanhar_pedidos
     (Selecionar Itens) as selecionar_itens
     (Finalizar Pedido) as finalizar_pedido
@@ -22,13 +22,13 @@ rectangle "Gerenciamento de Pedidos"{
 }
 
 cliente --> visualizar_cardapio
-cliente --> visualizar_carrinho
+cliente --> visualizar_pedido
 cliente --> acompanhar_pedidos
 cliente --> confirmar_entrega
 
 visualizar_cardapio <.. selecionar_itens: <<extend>> 
-visualizar_carrinho <.. finalizar_pedido: <<extend>>
-visualizar_carrinho <.. cancelar_meu_pedido: <<extend>>
+visualizar_pedido <.. finalizar_pedido: <<extend>>
+visualizar_pedido <.. cancelar_meu_pedido: <<extend>>
 finalizar_pedido ..> definir_pagamento: <<include>>
 
 
