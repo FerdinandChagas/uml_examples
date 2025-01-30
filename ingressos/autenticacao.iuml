@@ -20,7 +20,13 @@ activate controle_bd
 controle_bd -> bd: consultarLogin(login: String): Hash
 activate bd
 
-bd --> controle_bd: consultarUsuario(id: Hash): String[]
+bd --> controle_bd
+deactivate bd
+
+controle_bd -> bd: consultarUsuario(id: Hash): String[]
+activate bd
+
+bd --> controle_bd
 deactivate bd
 
 controle_bd --> controle_usuario
