@@ -1,7 +1,7 @@
 @startuml
 left to right direction
 
-class Ingresso{
+class Ingresso <<entity>>{
     id
     valor
     evento

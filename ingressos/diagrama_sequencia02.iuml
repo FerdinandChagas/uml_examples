@@ -1,0 +1,46 @@
+@startuml
+hide footbox
+actor Cliente as cliente_ator
+participant TelaListaEventos as tela_lista_eventos
+participant ControleEvento as controle_evento
+participant TelaEvento as tela_evento
+participant Evento as evento
+participant ControleIngresso as controle_ingresso
+participant Pagamento as pagamento
+participant ControlePagamento as controle_pagamento
+collections Ingressos as ingressos
+
+database BD as bd
+
+ref over cliente_ator, tela_lista_eventos, controle_evento, evento, bd: Selecionar Evento
+
+cliente_ator -> tela_evento: comprarIngresso(evento: Evento, qnt: int): Ingresso[]
+activate tela_evento
+
+tela_evento -> controle_ingresso: comprarIngresso(evento: Evento, qnt: int): Ingresso[]
+activate controle_ingresso
+
+controle_ingresso -> controle_ingresso: verificarDisponibilidade(evento: Evento, qnt: int): boolean
+activate controle_ingresso
+deactivate evento
+deactivate controle_ingresso
+
+ref over controle_ingresso, controle_pagamento, pagamento, bd: Realizar Pagamento
+
+controle_ingresso -> controle_ingresso: alocarIngressos(qnt: int): Ingresso[]
+activate controle_ingresso
+
+controle_ingresso -> bd: atualizar_ingressos(qnt: int): String[]
+activate bd
+
+bd --> controle_ingresso
+deactivate bd
+
+controle_ingresso -> ingressos **: <<create>>
+activate ingressos
+deactivate controle_ingresso
+
+controle_ingresso --> tela_evento
+deactivate controle_ingresso
+deactivate ingressos
+@enduml

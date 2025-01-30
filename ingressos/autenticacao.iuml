@@ -1,0 +1,36 @@
+@startuml
+hide footbox
+
+actor Cliente as cliente
+participant TelaLogin as tela_login
+participant ControleUsuario as controle_usuario
+participant ControleBD as controle_bd
+participant Usuario as usuario
+database BancoDados as bd
+
+cliente -> tela_login: 1:realizarLogin(login: String, senha: String): Usuario
+activate tela_login
+
+tela_login -> controle_usuario: 1.1:autenticarUsuario(login: String, senha: String): Usuario
+activate controle_usuario
+
+controle_usuario -> controle_bd: validarUsuario(login: String, senha: String): String[]
+activate controle_bd
+
+controle_bd -> bd: consultarLogin(login: String): Hash
+activate bd
+
+bd --> controle_bd: consultarUsuario(id: Hash): String[]
+deactivate bd
+
+controle_bd --> controle_usuario
+deactivate controle_bd
+
+controle_usuario -> usuario **: <<create>>
+activate usuario
+
+controle_usuario --> tela_login
+deactivate controle_usuario
+
+
+@enduml
