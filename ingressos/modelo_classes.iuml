@@ -11,6 +11,23 @@ class Ingresso{
     data_evento
     setor
     situacao
+}
+
+class TelaIngresso{
+    campo_id
+    campo_valor
+    campo_evento
+    campo_cliente
+    campo_lote
+    campo_data_emissao
+    campo_data_evento
+    campo_setor
+    campo_situacao
+    botao_enviar
+    enviar()
+}
+
+class ControleIngresso{
     realizar_reembolso()
     realizar_compra()
     realizar_validacao()
@@ -30,6 +47,26 @@ class Evento{
     motivo_cancelamento
     motivo_adiamento
     organizador
+    
+}
+
+class TelaEvento{
+    campo_nome
+    campo_local
+    campo_horario
+    campo_data
+    campo_qnt_maxima
+    campo_tipo
+    campo_lotes
+    campo_situacao
+    campo_motivo_cancelamento
+    campo_motivo_adiamento
+    campo_organizador
+    botao_enviar
+    enviar()
+}
+
+class ControleEvento{
     listar_clientes()
     cadastrar_evento()
     atualizar_evento()
@@ -45,6 +82,20 @@ class Cliente{
     email
     cpf
     ingressos
+ 
+}
+
+class TelaCliente{
+    campo_nome
+    campo_telefone
+    campo_email
+    campo_cpf
+    campo_ingressos
+    botao_enviar
+    enviar()
+}
+
+class ControleCliente{
     cadastrar_cliente()
     atualizar_cliente()
     remover_cliente()
@@ -58,6 +109,19 @@ class Organizador{
     telefone
     eventos
     cpf_cnpj
+}
+
+class TelaOrganizador{
+    campo_nome
+    campo_email
+    campo_telefone
+    campo_eventos
+    campo_cpf_cnpj
+    botao_enviar
+    enviar()
+}
+
+class ControleOrganizador{
     cadastrar_organizador()
     atualizar_organizador()
     remove_organizador()
@@ -72,6 +136,22 @@ class Lote{
     valor
 }
 
+class TelaLote{
+    campo_quantidade_ingressos
+    campo_data_inicio
+    campo_data_fim
+    campo_valor
+    botao_enviar
+    enviar()
+}
+
+class ControleLote{
+    cadastrar_lote()
+    listar_lotes()
+    atualizar_lotes()
+    remover_lotes()
+}
+
 class Local{
     id
     nome
@@ -79,25 +159,55 @@ class Local{
     capacidade_max
     tipo
     agenda_eventos
+}
+
+class TelaLocal{
+    campo_nome
+    campo_endereco
+    campo_capacidade_max
+    campo_tipo
+    campo_agenda_eventos
+    botao_enviar
+    enviar()
+}
+
+class ControleLocal{
     cadastrar_local()
     atualizar_local()
     remover_local()
     listar_locais()
 }
 
-Ingresso -- Evento
-Ingresso -- Cliente
-Ingresso -- Lote
+Ingresso "0..*"--"1..*" Cliente: < possui
+Ingresso "1..*"--"1..*" Lote: < possui
+Ingresso "*"--"1..*" Evento: < possui
 
-Evento -- Cliente
-Evento -- Organizador
-Evento -- Lote
-Evento -- Local 
+Evento "1"--"1" Local: possui >
+Evento "1"--"1..*" Lote: possui >
+Evento "1..*"--"1..*" Organizador: possui >
 
-Organizador -- Evento
+TelaIngresso "1"--"1" ControleIngresso: solicita > 
+ControleIngresso "1"--"0..*" Ingresso: controla >
 
-Local -- Ingresso
+TelaCliente -- ControleCliente: solicita >
+ControleCliente -- Cliente: controla >
 
+TelaLote -- ControleLote: solicita >
+ControleLote -- Lote: controla >
 
+TelaEvento -- ControleEvento: solicita >
+ControleEvento -- Evento: controla >
+
+TelaLocal -up- ControleLocal: solicita >
+ControleLocal -up- Local: controla >
+
+TelaOrganizador -- ControleOrganizador: solicita >
+ControleOrganizador -- Organizador: controla >
+
+ControleEvento -- ControleIngresso: solicita >
+ControleIngresso -- ControleCliente: solicita >
+
+ControleEvento -- ControleLocal: solicita >
+ControleEvento -- ControleLote: solicita >
 
 @enduml
