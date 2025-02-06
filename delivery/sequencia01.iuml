@@ -1,0 +1,52 @@
+@startuml "Realizar Pedido"
+hide footbox
+
+actor Cliente
+participant TelaCardapio
+
+Cliente -> TelaCardapio: selecionarItem(id_item: String)
+activate TelaCardapio
+TelaCardapio -> TelaItemPedido: visualizarItem(id_item: String)
+activate TelaItemPedido
+
+TelaItemPedido --> Cliente
+
+Cliente -> TelaItemPedido: adicionarItem(quantidade: int)
+
+TelaItemPedido -> ControlePedido: adicionarItem(id_item: String, qnt: int): Pedido
+activate ControlePedido
+
+ControlePedido -> Pedido**: <<create>>
+activate Pedido
+
+ControlePedido -> ItemPedido**: <<create>>
+activate ItemPedido
+
+ControlePedido -> ControlePedido: adicionarItem(item: ItemPedido): Pedido
+activate ControlePedido
+
+ControlePedido --> TelaItemPedido
+TelaItemPedido --> TelaCardapio
+
+TelaCardapio --> Cliente
+
+Cliente -> TelaCardapio: visualizarCarrinho()
+TelaCardapio -> TelaCarrinho: exibirCarrinho()
+activate TelaCarrinho
+
+TelaCarrinho -> ControlePedido: buscarPedido(id_pedido: String): Pedido
+
+TelaCarrinho --> Cliente
+deactivate TelaCardapio
+
+Cliente -> TelaCarrinho: finalizarPedido(id_pedido: String)
+
+TelaCarrinho -> TelaPagamento: exibirTelaPagamento(id_pedido: String)
+TelaCarrinho --> Cliente
+
+Cliente -> TelaPagamento: definirFormaPagamento(tipo: String)
+TelaPagamento --> Cliente
+
+Cliente -> TelaPagamento: finalizarCompra(id_pedido: String)
+TelaPagamento --> Cliente
+@enduml

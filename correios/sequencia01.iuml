@@ -1,0 +1,77 @@
+@startuml "Diagrama de Sequencia 01"
+hide footbox
+
+actor Loja
+participant TelaEncomenda
+participant ControleEncomenda
+
+Loja -> TelaEncomenda: buscarProduto(codigo_produto: String)
+activate TelaEncomenda
+
+TelaEncomenda -> ControleProduto: buscar(codigo_produto: String): Produto
+activate ControleProduto
+
+ControleProduto -> Produto**: <<create>>
+activate Produto
+
+ControleProduto --> TelaEncomenda
+deactivate ControleProduto
+
+
+
+TelaEncomenda -> TelaEncomenda: converteString(produto: Produto)
+
+activate TelaEncomenda
+deactivate TelaEncomenda
+deactivate Produto
+
+TelaEncomenda --> Loja
+deactivate TelaEncomenda
+
+Loja -> TelaEncomenda: cadastrarEncomenda(*dados): String
+activate TelaEncomenda
+
+TelaEncomenda -> ControleEncomenda: solicitar(*dados): Encomenda
+activate ControleEncomenda
+
+ControleEncomenda -> ControleCorreios: obterPrazoFrete(*dados): int,float
+activate ControleCorreios
+
+ControleCorreios -> ControleCorreios: calcularPrazo(origem: String, destino: String)
+activate ControleCorreios
+deactivate ControleCorreios
+
+ControleCorreios -> ControleCorreios: calcularFrete(origem: String, destino: String, peso: float)
+activate ControleCorreios
+deactivate ControleCorreios
+
+ControleCorreios --> ControleEncomenda
+deactivate ControleCorreios
+
+ControleEncomenda --> TelaEncomenda
+deactivate ControleEncomenda
+TelaEncomenda --> Loja
+deactivate TelaEncomenda
+
+Loja -> TelaEncomenda: confirmarCadastro(*dados): boolean
+activate TelaEncomenda
+
+TelaEncomenda -> ControleEncomenda: cadastrar(*dados): boolean
+activate ControleEncomenda
+
+ControleEncomenda -> Encomenda**: <<create>>
+activate Encomenda
+
+ControleEncomenda --> TelaEncomenda
+deactivate ControleEncomenda
+
+TelaEncomenda -> TelaEncomenda: converteString(encomenda: Encomenda): String[]
+activate TelaEncomenda
+deactivate Encomenda
+
+TelaEncomenda --> Loja
+
+deactivate TelaEncomenda
+
+
+@enduml

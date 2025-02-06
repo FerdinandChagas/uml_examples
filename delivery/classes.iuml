@@ -2,74 +2,89 @@
 left to right direction
 
 class Restaurante{
-    nome
-    endereco
-    telefone
-    cnpj
-    cardapio
-    horario_funcionamento
-    funcionarios
-    cadastrar_cardapio()
-    aceitar_pedido()
-    monitorar_pedido()
-    finalizar_pedido()
-    cancelar_pedido()
+    -nome: String
+    -endereco: String
+    -telefone: String
+    -cnpj: String
+    -cardapio: Cardapio
+    -horario_funcionamento: Time
+    -funcionarios: Funcionario[]
 }
 
 class Cardapio{
-    lista_itens
-    data_cadastro
-    buscar_item()
-    filtrar_itens()
+    -lista_itens: Item[]
+    -data_cadastro: DateTime
+    +adicionar_item(item: Item): Cardapio
+    +remover_item(item: Item): Cardapio
+    +listar_itens()
+    +buscar_item()
+    +filtrar_itens()
 }
 
 class Item{
-    nome
-    descricao
-    preco
-    cadastrar_item()
-    remover_item()
-    atualizar_item()
+    -nome: String
+    -descricao: String
+    -preco: float
+    +cadastrar_item(*dados): Item
+    +remover_item()
+    +atualizar_item()
 }
 
 class ItemPedido{
-    item
-    quantidade
+    -item: Item
+    -quantidade: int
     definir_quantidade()
 }
 
 class Pedido{
-    lista_itens_pedidos
-    valor_total
-    hora
-    cliente
-    pagamento
-    status
-    adicionar_item()
-    remover_item()
-    atualizar_status()
+    -lista_itens_pedidos: ItemPedido[]
+    -valor_total: float
+    -hora: Time
+    -cliente: Cliente
+    -pagamento: Pagamento
+    -status: String
+    +adicionar_item()
+    +remover_item()
+    +atualizar_status()
+    +atualizar_pedido()
 }
 
-class Cliente{
-    nome
-    endereco
-    telefone
-    cpf
-    rg
-    historico_pedidos
+class Usuario{
+    -nome: String
+    -endereco: String
+    -telefone: String
+    -cpf: String
+    -rg: String
+}
+
+class Cliente<Usuario>{
+    -historico_pedidos: Pedido[]
+    +monitorar_pedido() 
+}
+
+class Funcionario<Usuario>{
+    -cargo: String
+    -horario: Time
+}
+
+class Entregador<Usuario>{
+    -novato: boolean
+    -disponibilidade: boolean
+    -historico_entregas: Entrega[]
+    -classificacao: float
 }
 
 class Entrega{
-    status
-    pedido
-    entregador
-    atualizar_status()
+    -status: String
+    -pedido: Pedido
+    -entregador: Entregador
+    +atualizar_status()
 }
 
 class Pagamento{
-    forma_pagamento
-    valor
-    data_pagamento
+    -forma_pagamento: String
+    -valor: float
+    -data_pagamento: Date
 }
 
 Cardapio "1"*--"1..*" Item: possui >

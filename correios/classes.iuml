@@ -1,0 +1,83 @@
+@startuml "Diagrama de Classes"
+left to right direction
+
+class Loja{
+    -nome: String
+    -endereco: String
+    -cnpj: String
+    -email: String
+    -telefone: String
+    -proprietario: String
+}
+
+class Cliente{
+    -nome: String
+    -cpf: String
+    -endereco: String
+    -email: String
+    -telefone: String
+    -cep: String
+}
+
+class Produto{
+    -loja: Loja
+    -tamanho: float
+    -peso: float
+    -valor: float
+}
+
+class Encomenda{
+    -origem: String
+    -destino: String
+    -codigo: String
+    -cliente: Cliente
+    -loja: Loja
+    -prazo: int
+    -modalidade: String
+    -produtos: Produto[]
+}
+
+class TelaEncomenda{
+    +buscaProduto(codigo_produto: String)
+    +cadastrarEncomenda(*dados): String
+    +confirmarCadastro(*dados): boolean
+    -converterString(produto: Produto): String[]
+    -converterString(encomenda: Encomenda): String[]
+}
+
+class ControleProduto{
+    +buscar(codigo_produto: String): Produto
+}
+
+class ControleEncomenda{
+    +solicitar(*dados): String[]
+    +cadastrar(*dados): boolean
+}
+
+class ControleCorreios{
+    +obterPrazoFrete(*dados): int, float
+    -calcularPrazo(origem: String, destino: String): int
+    -calcularFrete(origem: String, destino: String, peso:float): float
+}
+
+class Rastreamento{
+    -encomenda: Encomenda
+    -cliente: Cliente
+    -status: String
+    -acompanhamento: String[]
+}
+
+Rastreamento "1"--"1" Encomenda: possui >
+Rastreamento "1"--"1" Cliente: possui > 
+Encomenda "1..*"--"1..*" Produto: possui >
+Cliente "1..*"--"0..*" Encomenda: possui >
+Loja "1..*"--"1..*" Encomenda: possui >
+Loja "1"--"*" Produto: possui >
+
+TelaEncomenda "*"--"1" ControleEncomenda: solicita >
+TelaEncomenda "*"--"1" ControleProduto: solicita >
+ControleEncomenda "1"--"1" ControleCorreios: solicita >
+ControleEncomenda "1"--"1" Encomenda: cria >
+ControleProduto "1"--"*" Produto: gerencia >
+
+@enduml
