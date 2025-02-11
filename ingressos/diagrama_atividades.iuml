@@ -1,0 +1,28 @@
+@startuml "Comprar Ingresso"
+
+start
+
+|Cliente|
+:Selecionar Evento;
+:Verificar Disponibilidade;
+
+if (Disponível?) then (sim)
+    fork
+        :Solicitar Pagamento;
+        if (Pagamento realizado?) then (sim)
+            :Imprimir Comprovante;
+            :Imprimir Ingressos;
+        else (não)
+            stop
+        end if
+    fork again
+        |Evento|
+        :Alocar Ingressos;
+        :Atualizar Ingressos;
+    end fork
+else (não)
+    stop
+end if
+
+stop
+@enduml

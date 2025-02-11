@@ -1,0 +1,22 @@
+@startuml "Diagrama de Estados - Pedido"
+
+Cadastrado: exit/notificar(cliente)
+Pendente: exit/notificar(cliente)
+Concluido: exit/notificar(cliente)
+Cancelado: exit/notificar(cliente)
+Entregue: entry/notificar(restaurante)
+
+[*]--> Cadastrado
+
+Cadastrado --> Pendente: Aceito/preparar(pedido)
+Cadastrado --> Cancelado: Cancelar/cancelar(pedido)
+Pendente --> Concluido: Pedido pronto/concluir(pedido)
+Pendente --> Cancelado: Cancelar/cancelar(pedido)
+Concluido --> Entregue: Entrega realizada/entregar(pedido)
+Concluido --> Cancelado: Estornar/cancelar(pedido)
+Concluido --> Pendente: Pedido extraviado/preparar(pedido)
+
+Entregue --> [*]
+Cancelado --> [*]
+
+@enduml
