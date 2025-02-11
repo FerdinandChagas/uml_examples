@@ -1,11 +1,12 @@
 @startuml "Comprar Ingresso"
-
+|Cliente|
 start
 
-|Cliente|
 :Selecionar Evento;
+:Solicitar Ingressos;
+|Evento|
 :Verificar Disponibilidade;
-
+|Cliente|
 if (Disponível?) then (sim)
     fork
         :Solicitar Pagamento;
@@ -19,6 +20,7 @@ if (Disponível?) then (sim)
         |Evento|
         :Alocar Ingressos;
         :Atualizar Ingressos;
+    |Cliente|
     end fork
 else (não)
     stop
