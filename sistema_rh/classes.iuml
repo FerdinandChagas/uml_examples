@@ -1,0 +1,37 @@
+@startuml "Sistema de RH"
+
+class Funcinoario{
+    - id : int
+    - matricula : int
+    - nome : String
+    - cpf : String
+    - salario: float
+    - cargo: String
+    - departamento: Departamento
+    - data_contratacao: Date
+    - data_nascimento: Date
+    + setNome(nome: String): void
+    + getNome(): String
+}
+
+
+class Recrutador(Funcionario){
+    + adicionarFuncionario(*args, **kwargs): Funcinoario
+    + removerFuncionario(matricula: int): boolean
+
+    public static void main(String args[]){
+
+    }
+}
+
+adicionarFuncionario(232334,'Júlio','123.123.123-12','3.000')
+adicionarFuncionario(matricla=232334,nome='Julio',cpf='123.123.123-12',salario='3000')
+
+class Projeto{
+
+}
+
+class Departamento{
+
+}
+@enduml

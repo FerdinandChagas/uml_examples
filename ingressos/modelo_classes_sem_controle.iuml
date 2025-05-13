@@ -1,0 +1,86 @@
+@startuml
+left to right direction
+
+class Ingresso <<entity>>{
+    -id: String
+    -valor: float
+    -evento: Evento
+    -cliente: Cliente
+    -lote: Lote
+    -data_emissao: Date
+    -data_evento: Date
+    -setor: String
+    -situacao: String
+}
+
+class Evento{
+    -id: String
+    -nome: String
+    -local: Local
+    -horario: String
+    -data: Date
+    -qnt_maxima: int
+    -tipo: String
+    -lotes: Lote[]
+    -ingressos_vendidos: int
+    -situacao: String
+    -motivo_cancelamento: String
+    -motivo_adiamento: String
+    -organizador: Organizador
+    
+}
+
+abstract class Usuario{
+    -id: String
+    -nome: String
+    -telefone: String
+    -email: String
+}
+
+class Cliente<Usuario>{
+    -cpf: String
+    -ingressos: List<Ingresso>
+}
+
+class Organizador<Usuario>{
+    -eventos: List<Evento>
+    -cpf_cnpj: String
+}
+
+class AgendaEvento{
+    -evento: Evento
+    -local: Local
+}
+
+class Lote{
+    -id: String
+    -quantidade_ingressos: int
+    -data_inicio: Date
+    -data_fim: Date
+    -valor: float
+}
+
+class Local{
+    -id: String
+    -nome: String
+    -endereco: String
+    -capacidade_max: int
+    -tipo: String
+}
+
+Ingresso "0..*"--"1..*" Cliente: < possui
+Ingresso o-- Lote: < possui
+Ingresso "*"--"1..*" Evento: < possui
+
+Evento "1"--"1" Local: possui >
+(Evento, Local) .. AgendaEvento
+Evento "1"--"1..*" Lote: possui >
+Evento "1..*"--"1..*" Organizador: possui >
+
+
+Cliente --|> Usuario
+Organizador --|> Usuario
+
+
+
+@enduml

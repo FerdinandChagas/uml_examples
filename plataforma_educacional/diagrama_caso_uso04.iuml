@@ -1,0 +1,25 @@
+@startuml
+
+left to right direction
+:Editora: as editora
+
+rectangle "Plataforma Educacional"{
+    (Gerenciar Livros) as gerenciar_livros
+    (Criar Módulo Interativo) as criar_modulo_interativo
+
+    (Gerar Relatório de Uso) as gerar_relatorio_uso
+    (Visualizar Catálogo) as visualizar_catalogo
+    (Enviar Comunicado) as enviar_comunicado
+    (Acessar Chat com a Escola) as acessar_chat_escola
+}
+
+editora -- gerenciar_livros
+editora -- criar_modulo_interativo
+editora -- cadastrar_material
+editora -- gerar_relatorio_uso
+editora -- visualizar_catalogo
+editora -- enviar_comunicado
+editora -- acessar_chat_escola
+
+cadastrar_material .> realizar_upload_material : <<include>>
+@enduml

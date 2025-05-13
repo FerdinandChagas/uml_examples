@@ -1,0 +1,29 @@
+@startuml
+left to right direction
+
+:Usuario: as usuario
+:Aluno: as aluno
+:Professor: as professor
+:Escola: as escola
+:Editora: as editora
+
+rectangle "Plataforma Educacional" {
+    (Realizar Login) as realizar_login
+    (Visualizar Notificações) as visualizar_notificacoes
+    (Selecionar Idioma) as selecionar_idioma
+}
+
+usuario -- realizar_login
+usuario -- visualizar_notificacoes
+usuario -- selecionar_idioma
+
+aluno --|> usuario
+professor --|> usuario
+escola --|> usuario
+editora --|> usuario
+
+
+
+
+
+@enduml

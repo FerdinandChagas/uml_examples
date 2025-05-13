@@ -3,9 +3,8 @@ hide footbox
 actor Cliente as cliente_ator
 participant TelaListaEventos as tela_lista_eventos
 participant ControleEvento as controle_evento
-participant TelaEvento as tela_evento
 participant Evento as evento
-participant ControleIngresso as controle_ingresso
+
 
 database BD as bd
 cliente_ator -> tela_lista_eventos: selecionarEvento(id_evento: String)

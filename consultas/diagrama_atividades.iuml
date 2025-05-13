@@ -1,0 +1,25 @@
+@startuml "Agendar Consulta"
+
+start
+:Solicitar matrícula;
+:Verificar Vagas;
+if (Vagas Disponíveis) then (sim)
+    :Verificar Choques de Horários;
+    if (Horário Disponível) then (sim)
+        :Confirmar Matrícula;
+        fork
+            :Notificar Confirmação;
+        fork again
+            :Atualizar vagas;
+        end fork
+    else (não)
+        :Notificar Choque de Horário;
+        stop
+    end if
+else (não)
+    :Notificar Vagas Esgotadas;
+    stop
+end if
+stop
+
+@enduml

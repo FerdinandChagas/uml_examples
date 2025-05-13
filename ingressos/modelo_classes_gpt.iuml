@@ -1,0 +1,60 @@
+@startuml
+
+class Local {
+    +id: CharField
+    +nome: CharField
+    +endereco: TextField
+    +capacidade_max: IntegerField
+    +tipo: CharField
+}
+
+class Evento {
+    +id: CharField
+    +nome: CharField
+    +horario: CharField
+    +data: DateField
+    +qnt_maxima: IntegerField
+    +tipo: CharField
+    +ingressos_vendidos: IntegerField
+    +situacao: CharField
+    +motivo_cancelamento: TextField
+    +motivo_adiamento: TextField
+}
+
+class Lote {
+    +id: CharField
+    +quantidade_ingressos: IntegerField
+    +data_inicio: DateField
+    +data_fim: DateField
+    +valor: FloatField
+}
+
+class Ingresso {
+    +id: CharField
+    +valor: FloatField
+    +data_emissao: DateField
+    +data_evento: DateField
+    +setor: CharField
+    +situacao: CharField
+}
+
+class AgendaEvento {
+}
+
+class Organizador {
+}
+
+class Cliente {
+}
+
+Evento "1" -- "*" Lote : possui
+Evento "1" -- "*" Ingresso : vende
+Evento "1" -- "*" AgendaEvento : possui
+Evento "1" -- "1" Local : acontece em
+Evento "1" -- "1" Organizador : organizado por
+Lote "1" -- "*" Ingresso : pertence a
+Ingresso "1" -- "1" Cliente : comprado por
+AgendaEvento "1" -- "1" Evento : agenda
+AgendaEvento "1" -- "1" Local : ocorre em
+
+@enduml

@@ -1,0 +1,31 @@
+@startuml
+left to right direction
+
+:Aluno: as aluno
+:Editora: as editora
+
+rectangle "Plataforma Educacional"{
+    (Acessar Conteúdos Complementares) as acessar_conteudos
+    (Acessar Trilhas de Aprendizagem) as acessar_trilhas
+    (Realizar Atividades) as realizar_atividades
+    (Visualiar Progresso Individual) as visualizar_progresso
+    (Visualizar Histórico de Atividades) as visualizar_historico
+    (Visualizar Recomendações) as visualizar_recomendacoes
+    (Baixar Materiais) as baixar_materiais
+    (Acessar Chat com Tutores) as acessar_chat
+    (Cadastrar Material) as cadastrar_material
+    (Realizar Upload de Material) as realizar_upload_material
+}
+
+aluno -- acessar_conteudos
+aluno -- acessar_trilhas
+aluno -- realizar_atividades
+aluno -- visualizar_progresso
+aluno -- visualizar_historico
+aluno -- visualizar_recomendacoes
+aluno -- baixar_materiais
+aluno -- acessar_chat
+editora -- cadastrar_material
+editora -- realizar_upload_material
+
+@enduml

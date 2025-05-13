@@ -1,0 +1,50 @@
+@startuml "Selecionar Evento"
+hide footbox
+actor Cliente as cliente_ator
+participant TelaListaEventos as tela_lista_eventos
+participant DefaultRouter as router
+participant ControleEvento as controle_evento
+participant Evento as evento
+participant EventoSerializer as evento_serializer
+participant ObjectManager as object_manager
+
+database BD as bd
+cliente_ator -> tela_lista_eventos: onClick()
+activate tela_lista_eventos
+
+tela_lista_eventos -> router: "/api/eventos/?id=123"
+activate router
+
+router -> controle_evento: request(JSON)
+activate controle_evento
+deactivate router
+
+controle_evento -> controle_evento: retrieve(pk=123)
+activate controle_evento
+
+controle_evento -> object_manager: filter(pk=123): Evento
+activate object_manager
+
+object_manager -> bd
+activate bd
+
+bd -> object_manager
+deactivate bd
+
+object_manager -> evento**: <<create>>
+activate evento
+
+object_manager  --> controle_evento
+deactivate object_manager
+
+controle_evento -> evento_serializer**: <<create>>
+deactivate evento
+activate evento_serializer
+deactivate controle_evento
+
+controle_evento --> tela_lista_eventos: "{"nome": "Festa da Firma", "data": "22/03/25"}"
+deactivate evento_serializer
+deactivate tela_lista_eventos
+
+
+@enduml

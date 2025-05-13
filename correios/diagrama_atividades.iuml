@@ -1,0 +1,25 @@
+@startuml "Diagrama de Atividades - Fluxo de Encomenda (Sem Telas)"
+
+start
+
+:Loja busca Produto (código_produto);
+:ControleProduto busca Produto;
+:Produto é criado e retornado;
+
+:Loja cadastra Encomenda;
+:ControleEncomenda recebe os dados;
+
+:ControleEncomenda obtém Prazo e Frete do ControleCorreios;
+fork
+    :ControleCorreios calcula Prazo;
+    :ControleCorreios calcula Frete;
+end fork
+
+:ControleCorreios retorna Prazo e Frete;
+:ControleEncomenda cria nova Encomenda;
+
+:Loja confirma Cadastro;
+:Encomenda é retornada para Loja;
+
+stop
+@enduml

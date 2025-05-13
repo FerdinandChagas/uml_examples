@@ -1,0 +1,54 @@
+@startuml "Carrinho"
+hide footbox
+
+actor Cliente
+participant FronteiraCarrinho
+participant ControleCarrinho
+participant Carrinho
+participant ControlePagamento
+participant Pagamento
+
+Cliente -> FronteiraCarrinho: finalizarCompra(id_venda)
+activate FronteiraCarrinho
+
+FronteiraCarrinho -> ControleCarrinho: finalizar(id_venda)
+activate ControleCarrinho
+
+ControleCarrinho -> Carrinho: obterItens(id_venda): Produto[]
+activate Carrinho
+
+Carrinho --> ControleCarrinho
+deactivate Carrinho
+
+ControleCarrinho -> ControleCarrinho: calcularTotal()
+activate ControleCarrinho
+
+deactivate ControleCarrinho
+
+ControleCarrinho -> ControlePagamento: gerarPagamento(id_venda)
+activate ControlePagamento
+
+create Pagamento
+ControlePagamento -> Pagamento: <<create>>
+activate Pagamento
+
+ControlePagamento -> ControlePagamento: notificarCliente()
+activate ControlePagamento
+
+deactivate ControlePagamento
+
+ControlePagamento --> ControleCarrinho
+deactivate ControlePagamento
+deactivate Pagamento
+
+ControleCarrinho --> FronteiraCarrinho
+deactivate ControleCarrinho
+
+FronteiraCarrinho --> Cliente
+deactivate FronteiraCarrinho
+
+
+
+
+
+@enduml

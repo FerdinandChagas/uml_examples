@@ -1,0 +1,53 @@
+@startuml
+left to right direction
+
+class DefaultRouter{
+    +routes: HashMap<String,ModelViewSet>
+}
+
+class Model{
+    +objects: ModelManager
+}
+
+class ModelViewSet{
+    +create(request, *args)
+    +list(request, *args)
+    +update(request, *args)
+    +destroy(request, *args)
+}
+
+class Ingresso<Model>{
+    -id: String
+    -valor: float
+    -evento: Evento
+    -cliente: Cliente
+    -lote: Lote
+    -data_emissao: Date
+    -data_evento: Date
+    -setor: String
+    -situacao: String
+}
+
+class IngressoSerializer<Serializer>{
+    +data: String[]
+    +validated_data: String[]
+    +is_valid(): boolean
+}
+
+class ControleIngresso<ModelViewSet>{
+    +realizar_reembolso(cliente: Cliente, ingresso: Ingresso): boolean
+    +realizar_compra(cliente: Cliente, ingresso: Ingresso): boolean
+    +realizar_validacao()(cliente: Cliente, ingresso: Ingresso): boolean
+}
+
+ControleIngresso "1"-->"0..*" Ingresso: manipula >
+
+Ingresso --|> Model
+
+ControleIngresso --|> ModelViewSet
+
+DefaultRouter --> ModelViewSet: direciona >
+ControleIngresso --> IngressoSerializer: usa >
+IngressoSerializer --> Ingresso: representa >
+
+@enduml

@@ -1,0 +1,62 @@
+@startuml "Sistema Academico"
+left to right direction
+
+package "Disciplinas"{
+    class Disciplina{
+        nome
+        professor
+        turmas
+        ementa
+    }
+
+    class ControleDisciplina{
+        getDisciplina(id_disciplina): Disciplina
+    }
+}
+
+package "Notas"{
+    class Notas{
+        aluno
+        disciplina
+        nota1
+        nota2
+        nota3
+        media
+    }
+
+    class ControleNotas{
+        calcularMedia(aluno, disciplina): float
+    }
+
+    class FronteiraNotas{
+        campoAluno
+        campoDisciplina
+        botaoCalcularMedia
+        solicitarCalcularMedia(aluno, disciplina)
+    }
+}
+
+package "Alunos"{
+    class Aluno{
+        matricula
+        horario
+        notas
+    }
+
+    class ControleAluno{
+        getAluno(matricula): Aluno
+    }
+}
+
+
+
+Aluno --> Disciplina: estuda >
+(Disciplina, Aluno) ..> Notas
+FronteiraNotas --> ControleNotas: solicita >
+ControleNotas --> Notas: gerencia >
+ControleNotas -down-> ControleDisciplina: solicita >
+ControleNotas -up-> ControleAluno: solicita >
+
+ControleDisciplina --> Disciplina: gerencia >
+
+ControleAluno --> Aluno: gerencia >

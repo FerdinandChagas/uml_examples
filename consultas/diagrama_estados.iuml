@@ -1,0 +1,34 @@
+@startuml "Agendamento de Consultas"
+
+'Definição do estado inicial'
+[*]--> Indefinida
+
+'Transição entre estados'
+Indefinida --> Solicitada: Solicitação/solicitar(data)
+
+Solicitada : do/verificarData(data)
+
+Solicitada --> Indefinida: "Data Indisponível"
+Solicitada --> Espera: "Data Disponível"
+
+Espera --> Confirmada: "Confirmação"/agenda.add(paciente,data)
+Espera --> Negada: "Horários indisponíveis"
+Espera --> Cancelada: "Cancelada solicitação"/agenda.remove(paciente,data)
+Confirmada --> Concluida: "Consulta Realizada"
+Negada --> Indefinida
+Negada: do/notificar(paciente)
+Confirmada --> Espera: "Reagendamento"/agenda.update(paciente,data)
+
+'Estados finais'
+Cancelada --> [*]
+Concluida --> [*]
+
+
+'Atividades do Estado'
+'Solicitada : entry/notificarSolicitacao(email)'
+'Solicitada : do/monitorarAgenda()'
+'Solicitada : exit/atualizarAgendamento(agendamento)'
+
+
+
+@enduml

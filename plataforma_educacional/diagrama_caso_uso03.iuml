@@ -1,0 +1,35 @@
+@startuml
+left to right direction
+
+:Escola: as escola
+
+rectangle "Plataforma Educacional"{
+    (Gerenciar Turmas) as gerenciar_turmas
+    (Gerenciar Usuários) as gerenciar_usuarios
+    (Gerar Reltório de Uso Geral) as gerar_relatorio_uso_geral
+    (Gerar Relatório de Uso por Turma) as gerar_relatorio_uso_turma
+    (Gerar Relatório de Uso por Professor) as gerar_relatorio_uso_professor
+    (Gerar Relatório de Adesão) as gerar_relatorio_adesao
+    (Gerar Relatório de Performance) as gerar_relatorio_performance
+    (Customizar interface) as customizar_interface
+    (Acessar Chat com a Editora) as acessar_chat_editora
+    (Gerar Relatório de Suporte Técnico) as gerar_relatorio_suporte
+    (Visualizar Catálogo) as visualizar_catalogo
+    (Realizar Pedido) as realizar_pedido
+    (Enviar Comunicado) as enviar_comunicado
+}
+
+escola -- gerenciar_turmas
+escola -- gerenciar_usuarios
+escola -- gerar_relatorio_uso_geral
+escola -- gerar_relatorio_uso_turma
+escola -- gerar_relatorio_uso_professor
+escola -- gerar_relatorio_adesao
+escola -- gerar_relatorio_performance
+escola -- customizar_interface
+escola -- acessar_chat_editora
+escola -- gerar_relatorio_suporte
+escola -- visualizar_catalogo
+escola -- realizar_pedido
+escola -- enviar_comunicado
+@enduml

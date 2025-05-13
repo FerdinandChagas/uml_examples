@@ -13,19 +13,6 @@ class Ingresso <<entity>>{
     -situacao: String
 }
 
-class TelaIngresso{
-    -campo_id: String
-    -campo_valor: String
-    -campo_evento: String
-    -campo_cliente: String
-    -campo_lote: String
-    -campo_data_emissao: String
-    -campo_data_evento: String
-    -campo_setor: String
-    -campo_situacao: String
-    -botao_enviar: Botao
-    +enviar(*args): String[]
-}
 
 class ControleIngresso{
     +realizar_reembolso(cliente: Cliente, ingresso: Ingresso): boolean
@@ -55,26 +42,6 @@ class AgendaEvento{
     +verificar_disponibilidade(id_local: String, data: Date): boolean
 }
 
-class TelaEvento{
-    -campo_nome: String
-    -campo_local: String
-    -campo_horario: String
-    -campo_data: String
-    -campo_qnt_maxima: int
-    -campo_tipo: String
-    -campo_lotes: String[]
-    -campo_situacao: String
-    -campo_motivo_cancelamento: String
-    -campo_motivo_adiamento: String
-    -campo_organizador: String
-    -botao_enviar: Botao
-    +enviar(*args): String
-}
-
-class TelaListaEvento{
-    selecionarEvento(id_evento: String): void
-}
-
 class ControleEvento{
     +listar_clientes(id_evento: String): List<Cliente>
     +buscarEvento(id_evento: String): Evento
@@ -83,11 +50,6 @@ class ControleEvento{
     +remover_evento(id_evento: String): boolean
     +listar_eventos(): List<Evento>
 }
-
-class BD{
-    consultarEvento(id_evento: String): String[]
-}
-
 
 abstract class Usuario{
     -id: String
@@ -100,16 +62,6 @@ class Cliente<Usuario>{
     -ingressos: List<Ingresso>
 }
 
-class TelaCliente{
-    -campo_nome: String
-    -campo_telefone: String
-    -camp1o_email: String
-    -campo_cpf: String
-    -campo_ingressos: String
-    -botao_enviar: Botao
-    +enviar(*args): String[]
-}
-
 class ControleCliente{
     +cadastrar_cliente(*args): Cliente
     +atualizar_cliente(*args): Cliente
@@ -120,16 +72,6 @@ class ControleCliente{
 class Organizador<Usuario>{
     -eventos: List<Evento>
     -cpf_cnpj: String
-}
-
-class TelaOrganizador{
-    -campo_nome: String
-    -campo_email: String
-    -campo_telefone: String
-    -campo_eventos: String
-    -campo_cpf_cnpj: String
-    -botao_enviar: Botao
-    +enviar(*args): String[]
 }
 
 class ControleOrganizador{
@@ -147,15 +89,6 @@ class Lote{
     -valor: float
 }
 
-class TelaLote{
-    -campo_quantidade_ingressos: String
-    -campo_data_inicio: String
-    -campo_data_fim: String
-    -campo_valor: String
-    -botao_enviar: Botao
-    +enviar(*args): String[]
-}
-
 class ControleLote{
     +cadastrar_lote(*args): Lote
     +listar_lotes(): List<Lote>
@@ -169,16 +102,6 @@ class Local{
     -endereco: String
     -capacidade_max: int
     -tipo: String
-}
-
-class TelaLocal{
-    -campo_nome: String
-    -campo_endereco: String
-    -campo_capacidade_max: String
-    -campo_tipo: String
-    -campo_agenda_eventos: String[]
-    -botao_enviar: Botao
-    +enviar(*args): String[]
 }
 
 class ControleLocal{
@@ -197,25 +120,17 @@ Evento "1"--"1" Local: possui >
 Evento "1"--"1..*" Lote: possui >
 Evento "1..*"--"1..*" Organizador: possui >
 
-TelaIngresso "1"--"1" ControleIngresso: solicita > 
 ControleIngresso "1"--"0..*" Ingresso: controla >
 
-TelaCliente -- ControleCliente: solicita >
 ControleCliente -- Cliente: controla >
 
-TelaLote -- ControleLote: solicita >
 ControleLote -- Lote: controla >
 
-TelaEvento ..> ControleEvento: solicita >
 ControleEvento ..> Evento: controla >
-ControleEvento ..> BD: solicita >
 
-TelaListaEvento ..> ControleEvento: solicita >
 
-TelaLocal -up- ControleLocal: solicita >
 ControleLocal -up- Local: controla >
 
-TelaOrganizador -- ControleOrganizador: solicita >
 ControleOrganizador -- Organizador: controla >
 
 Cliente --|> Usuario

@@ -1,0 +1,55 @@
+@startuml "Diagrama de Componentes - Sistema de Encomendas"
+
+package "Sistema de Encomendas" {
+    
+    [LojaViewSet] --> [LojaSerializer]
+    [ClienteViewSet] --> [ClienteSerializer]
+    [ProdutoViewSet] --> [ProdutoSerializer]
+    [EncomendaViewSet] --> [EncomendaSerializer]
+    [RastreamentoViewSet] --> [RastreamentoSerializer]
+
+    package "Modelos" {
+        [Loja]
+        [Cliente]
+        [Produto]
+        [Encomenda]
+        [Rastreamento]
+    }
+    
+    package "Serializers" {
+        [LojaSerializer] --> [Loja]
+        [ClienteSerializer] --> [Cliente]
+        [ProdutoSerializer] --> [Produto]
+        [EncomendaSerializer] --> [Encomenda]
+        [RastreamentoSerializer] --> [Rastreamento]
+    }
+
+    package "Views" {
+        [LojaViewSet] --> [Loja]
+        [ClienteViewSet] --> [Cliente]
+        [ProdutoViewSet] --> [Produto]
+        [EncomendaViewSet] --> [Encomenda]
+        [RastreamentoViewSet] --> [Rastreamento]
+    }
+    
+    package "Controle de Encomendas" {
+        [ControleProduto]
+        [ControleEncomenda]
+        [ControleCorreios]
+    }
+
+    package "Django Rest Framework" {
+        [Router] --> [ViewSets]
+        [ViewSets] --> [Serializers]
+        [ViewSets] --> [Models]
+    }
+
+    [EncomendaViewSet] --> [ControleEncomenda]
+    [ControleEncomenda] --> [ControleCorreios]
+    [ControleCorreios] --> [ControleCorreios] : calcula prazo e frete
+    [EncomendaViewSet] --> [Router]
+
+    [Router] --> [API DRF]
+}
+
+@enduml

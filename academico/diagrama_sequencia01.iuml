@@ -1,0 +1,57 @@
+@startuml "Notas Alunos"
+hide footbox
+
+actor Professor
+participant FronteiraNotas
+participant ControleNotas
+participant Notas
+participant Disciplina
+participant ControleDisciplina
+participant Aluno
+participant ControleAluno
+
+Professor -> FronteiraNotas: solicitaMedia(matricula, id_disciplina)
+activate FronteiraNotas
+
+FronteiraNotas -> ControleNotas: solicitaMedia(matricula, id_disciplina)
+activate ControleNotas
+
+ControleNotas -> ControleDisciplina: getDisciplina(id_disciplina): Disciplina
+activate ControleDisciplina
+
+create Disciplina
+ControleDisciplina -> Disciplina: <<create>>
+activate Disciplina
+
+ControleNotas -> ControleAluno: getAluno(matricula): Aluno
+activate ControleAluno
+
+create Aluno
+ControleAluno -> Aluno: <<create>>
+activate Aluno
+
+ControleDisciplina --> ControleNotas
+deactivate ControleDisciplina
+
+ControleAluno --> ControleNotas
+deactivate ControleAluno
+
+create Notas
+ControleNotas -> Notas: <<create>>
+activate Notas
+
+ControleNotas -> ControleNotas: calcularMedia(notas): float
+activate ControleNotas
+
+ControleNotas --> FronteiraNotas
+deactivate Disciplina
+deactivate Aluno
+deactivate Notas
+deactivate ControleNotas
+deactivate ControleNotas
+
+FronteiraNotas --> Professor
+deactivate FronteiraNotas
+
+
+@enduml

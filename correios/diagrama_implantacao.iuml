@@ -1,0 +1,32 @@
+@startuml "Diagrama de Implantação - Sistema de Encomendas"
+
+node "Cliente" {
+    [Navegador Web] 
+}
+
+node "Servidor Web" {
+    [Nginx] 
+    [Gunicorn] 
+}
+
+node "Servidor de Aplicação" {
+    [Django REST Framework] 
+    [Aplicação Encomendas]
+}
+
+node "Servidor de Banco de Dados" {
+    [PostgreSQL]
+}
+
+node "Serviço Externo" {
+    [API Correios] 
+}
+
+[Navegador Web] --> [Nginx] : Requisição HTTP
+[Nginx] --> [Gunicorn] : Encaminha requisição
+[Gunicorn] --> [Django REST Framework] : Processa requisição
+[Django REST Framework] --> [Aplicação Encomendas] : Chama lógica de negócio
+[Aplicação Encomendas] --> [PostgreSQL] : Consulta/Armazena dados
+[Aplicação Encomendas] --> [API Correios] : Obtém prazo e frete
+
+@enduml

@@ -1,0 +1,46 @@
+@startuml
+left to right direction
+
+:Professor: as professor
+
+rectangle "Plataforma Educacional" {
+  (Acessar Conteúdos dos Livros) as acessar_conteudos_livros
+  (Escolher Livro) as escolher_livro
+  (Fazer Anotações em Conteúdos) as fazer_anotacoes
+  (Escolher Conteúdo) as escolher_conteudo
+  (Acessar Material Exclusivo) as acessar_material_exclusivo
+  (Montar Atividade Personalizada) as montar_atividade_personalizada
+  (Aplicar Atividade Personalizada) as aplicar_atividade_personalizada
+  (Selecionar Atividade) as selecionar_atividade
+  (Visualizar Progresso da Turma) as visualizar_progresso_turma
+  (Selecionar Turma) as selecionar_turma
+  (Visualizar Progresso Individual) as visualizar_progresso_individual
+  (Selecionar Aluno) as selecionar_aluno
+  (Realizar Agendamento de Atividades) as realizar_agendamento_atividades
+  (Acessar Chat com a Editora) as acessar_chat_editora
+  (Visualizar Catálogo) as visualizar_catalogo
+  (Realizar Pedido) as realizar_pedido
+  (Enviar Comunicado) as enviar_comunicado
+}
+
+professor -- acessar_conteudos_livros
+professor -- fazer_anotacoes
+professor -- acessar_material_exclusivo
+professor -- montar_atividade_personalizada
+professor -- aplicar_atividade_personalizada
+professor -- visualizar_progresso_turma
+professor -- visualizar_progresso_individual
+professor -- realizar_agendamento_atividades
+professor -- acessar_chat_editora
+professor -- visualizar_catalogo
+professor -- realizar_pedido
+professor -- enviar_comunicado
+
+escolher_livro <.up. acessar_conteudos_livros : <<include>>
+escolher_conteudo <.up. fazer_anotacoes : <<include>>
+selecionar_atividade <.up. aplicar_atividade_personalizada : <<include>>
+selecionar_turma <.up. visualizar_progresso_turma : <<include>>
+selecionar_aluno <.up. visualizar_progresso_individual : <<include>>
+
+
+@enduml
