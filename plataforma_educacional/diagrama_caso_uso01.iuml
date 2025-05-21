@@ -22,6 +22,7 @@ aluno -- acessar_trilhas
 aluno -- realizar_atividades
 aluno -- visualizar_progresso
 aluno -- visualizar_historico
+visualizar_historico -right- editora
 aluno -- visualizar_recomendacoes
 aluno -- baixar_materiais
 aluno -- acessar_chat

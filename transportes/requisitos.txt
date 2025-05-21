@@ -1,0 +1,6 @@
+- O sistema deve permitir a visualização de solicitações de transporte;
+- O sistema deve permitir realizar agendamento de transporte;
+- O sistema deve permitir alocar veículo e motorista para um transporte agendado;
+- O sistema deve permitir rastrear o transporte;
+- O sistema deve permitir o motorista visualizar os transportes agendados;
+- O sistema deve permitir o motorista atualizar a localização do transporte.

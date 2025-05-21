@@ -1,0 +1,22 @@
+@startuml
+left to right direction
+
+:Setor Transportes: as setor_transportes
+:Motorista: as motorista
+
+rectangle "Agendamentos"{
+    (Visualizar Solicitações) as visualizar_solicitacoes
+    (Realizar Agendamento) as realizar_agendamento
+    (Alocar Veículo) as alocar_veiculo
+    (Alocar Motorista) as alocar_motorista
+}
+
+setor_transportes -- visualizar_solicitacoes
+setor_transportes -- realizar_agendamento
+realizar_agendamento .> alocar_veiculo: <<include>>
+realizar_agendamento .> alocar_motorista: <<include>>
+
+alocar_motorista -- motorista
+
+
+@enduml

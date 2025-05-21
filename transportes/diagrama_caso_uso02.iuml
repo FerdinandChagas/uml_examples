@@ -1,0 +1,17 @@
+@startuml
+left to right direction
+
+:Setor de Transporte: as setor_transportes
+:Motorista: as motorista
+
+rectangle "Rastreamento"{
+    (Visualizar Agendamentos) as visualizar_agendamentos
+    (Atualizar Localização) as atualizar_localizacao
+    (Rastrear Transporte) as rastrear_transporte
+}
+
+motorista -- visualizar_agendamentos
+motorista -- atualizar_localizacao
+setor_transportes -- rastrear_transporte
+
+@enduml
