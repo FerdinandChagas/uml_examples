@@ -21,8 +21,12 @@ class "Pedido"{
     +adicionar_item(item: Item): boolean
     +remover_item(item: Item): boolean
     +realizar_pedido(itens: List<Item>): boolean
+    +aceitar_pedido(): int
+    +visualizar_pedidos(): List<Pedido>
     +cancelar_pedido(): boolean
     +atualizar_status(novo: String): boolean
+    +listar_itens(): List<Item>
+    +confirmar_pagamento(): boolean
 }
 
 class Item{
@@ -42,9 +46,11 @@ class "Pagamento"{
     -valor_total: float
     -status: String
     -metodo: String
+    -mesa: int
     -desconto: float
     -data: Date
     -hora: Time
+    +encerrar_mesa(id_mesa: int): boolean
     +calcular_total(): float
     +gerar_recibo(): void
     +atulizar_status(novo: String): boolean
@@ -65,9 +71,16 @@ class "Caixa"{
     +gerar_relatorio_ano(): void
 }
 
+class Notificacao{
+    +notificar(cargo: String, msg: String): boolean
+    +notificar_por_pedido(id_pedido: int, msg: String): boolean
+    +notificar_por_garcom(id_garcom: int, msg: String): boolean
+}
+
 Funcionario "1"--"1" Pedido: registra >
-Pedido o-- Item
+Pedido o-left- Item
 Caixa "1..*"--"*" Pedido: lista >
+Pedido "1"-right-"*" Notificacao: gera >
 Pagamento -- Pedido
 
 @enduml

@@ -1,0 +1,52 @@
+@startuml
+hide footbox
+
+actor Garcom
+
+participant Pagamento
+
+Garcom -> Pagamento: 1:encerrar_mesa(id_mesa: int): boolean
+activate Pagamento
+
+Pagamento -> Pagamento: 1.1:calcular_total(): float
+activate Pagamento
+
+Pagamento -> Pedido: 1.1.1[1..n]: listar_itens(): List<Item>
+activate Pedido
+
+Pedido -> Item: 1.1.1.1: calcular_total(): float
+activate Item
+
+Item --> Pedido
+deactivate Item
+
+Pedido --> Pagamento
+Pagamento -> Pedido: atualizar_status(novo="Encerrado"):boolean
+Pedido --> Pagamento
+deactivate Pedido
+
+deactivate Pagamento
+
+Pagamento --> Garcom
+deactivate Pagamento
+
+Garcom -> Pagamento: 2:confirmar_pagamento(): boolean
+activate Pagamento
+
+Pagamento -> Pagamento: atualizar_status(novo="Confirmado"):boolean
+activate Pagamento
+
+deactivate Pagamento
+
+Pagamento -> Pagamento: gerar_recibo(): boolean
+activate Pagamento
+deactivate Pagamento 
+
+Pagamento -> Notificacao: notificar(cargo="Caixa", msg): boolean
+activate Notificacao
+Notificacao --> Pagamento
+deactivate Notificacao
+
+Pagamento --> Garcom
+
+@enduml

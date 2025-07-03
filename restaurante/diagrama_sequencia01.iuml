@@ -20,7 +20,7 @@ activate pedido
 
 pedido -> pedido: 2.1:atualizar_status(novo="Solicitado"): boolean
 activate pedido
-pedido -> notificacao: 2.2:notificar(cargo="Cozinheiro"): boolean
+pedido -> notificacao: 2.2:notificar(cargo="Cozinheiro", msg): boolean
 activate notificacao
 notificacao --> pedido
 deactivate notificacao
@@ -40,7 +40,7 @@ activate pedido
 
 pedido -> pedido: 4.1:atualizar_status(novo="Preparando"): boolean
 activate pedido
-pedido -> notificacao: 4.2:notificar_por_id(id: int): boolean
+pedido -> notificacao: 4.2:notificar_por_pedido(id_pedido: int, msg): boolean
 activate notificacao
 notificacao --> pedido
 deactivate notificacao
@@ -51,7 +51,7 @@ deactivate pedido
 
 cozinheiro -> pedido: 5:atualizar_status(novo="Pronto"): boolean
 activate pedido
-pedido -> notificacao: 5.1:notificar_por_id(id: int): boolean
+pedido -> notificacao: 5.1:notificar_por_garcom(id_garcom: int, msg): boolean
 activate notificacao
 notificacao --> pedido
 deactivate notificacao
