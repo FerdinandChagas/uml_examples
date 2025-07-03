@@ -1,0 +1,73 @@
+@startuml
+
+
+class "Funcionario"{
+    -id: int
+    -nome: String
+    -cargo: String
+    -login: String
+    -senha: Password
+    +login(login: String, password: Passord): boolean
+    +logout(): boolean
+}
+
+
+class "Pedido"{
+    -id:int
+    -mesa: int
+    -itens: List<Item>
+    -status: String
+    -funcionario: Funcionario
+    +adicionar_item(item: Item): boolean
+    +remover_item(item: Item): boolean
+    +realizar_pedido(itens: List<Item>): boolean
+    +cancelar_pedido(): boolean
+    +atualizar_status(novo: String): boolean
+}
+
+class Item{
+    -id: int
+    -nome: String
+    -descricao: String
+    -valor_unitario: float
+    -valor_total: float
+    -quantidade: int
+    -disponibilidade: boolean
+    +atualizar_disponibilidade(): boolean
+    +calcular_total(): boolean
+}
+
+class "Pagamento"{
+    -pedidos: List<Pedido>
+    -valor_total: float
+    -status: String
+    -metodo: String
+    -desconto: float
+    -data: Date
+    -hora: Time
+    +calcular_total(): float
+    +gerar_recibo(): void
+    +atulizar_status(novo: String): boolean
+}
+
+class "Caixa"{
+    -pedidos: List<Pedido>
+    -data_incio: Date
+    -data_fim: Date
+    -entrada: float
+    -saida: float
+    -saldo: float
+    -funcionario: Funcionario
+    +abrir_caixa(): boolean
+    +fechar_caixa(): boolean
+    +gerar_relatorio_dia(): void
+    +gerar_relatorio_mes(): void
+    +gerar_relatorio_ano(): void
+}
+
+Funcionario "1"--"1" Pedido: registra >
+Pedido o-- Item
+Caixa "1..*"--"*" Pedido: lista >
+Pagamento -- Pedido
+
+@enduml

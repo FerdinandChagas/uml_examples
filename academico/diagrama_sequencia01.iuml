@@ -10,20 +10,20 @@ participant ControleDisciplina
 participant Aluno
 participant ControleAluno
 
-Professor -> FronteiraNotas: solicitaMedia(matricula, id_disciplina)
+Professor -> FronteiraNotas: 1:solicitaMedia(matricula: String, id_disciplina: String): boolean
 activate FronteiraNotas
 
-FronteiraNotas -> ControleNotas: solicitaMedia(matricula, id_disciplina)
+FronteiraNotas -> ControleNotas: 1.1:solicitaMedia(matricula, id_disciplina)
 activate ControleNotas
 
-ControleNotas -> ControleDisciplina: getDisciplina(id_disciplina): Disciplina
+ControleNotas -> ControleDisciplina: 1.1.1:getDisciplina(id_disciplina): Disciplina
 activate ControleDisciplina
 
 create Disciplina
 ControleDisciplina -> Disciplina: <<create>>
 activate Disciplina
 
-ControleNotas -> ControleAluno: getAluno(matricula): Aluno
+ControleNotas -> ControleAluno: 1.1.2:getAluno(matricula): Aluno
 activate ControleAluno
 
 create Aluno
@@ -40,7 +40,7 @@ create Notas
 ControleNotas -> Notas: <<create>>
 activate Notas
 
-ControleNotas -> ControleNotas: calcularMedia(notas): float
+ControleNotas -> ControleNotas: 1.1.3:calcularMedia(notas): float
 activate ControleNotas
 
 ControleNotas --> FronteiraNotas

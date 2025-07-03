@@ -1,0 +1,67 @@
+@startuml
+hide footbox
+
+actor Garçom as garcom
+actor Cozinheiro as cozinheiro
+
+participant Pedido as pedido
+participant Notificacao as notificacao
+
+garcom -> pedido: [1..*]1: adicionar_item(item: Item): boolean
+activate pedido
+
+pedido --> garcom
+deactivate pedido
+
+garcom -> pedido: 2:realizar_pedido(itens: List<Item>): boolean
+activate pedido
+
+
+
+pedido -> pedido: 2.1:atualizar_status(novo="Solicitado"): boolean
+activate pedido
+pedido -> notificacao: 2.2:notificar(cargo="Cozinheiro"): boolean
+activate notificacao
+notificacao --> pedido
+deactivate notificacao
+deactivate pedido
+
+pedido --> garcom
+deactivate pedido
+
+cozinheiro -> pedido: 3:visualizar_pedidos(): List<Pedidos>
+activate pedido
+
+pedido --> cozinheiro
+deactivate pedido
+
+cozinheiro -> pedido: 4:aceitar_pedido(): int
+activate pedido
+
+pedido -> pedido: 4.1:atualizar_status(novo="Preparando"): boolean
+activate pedido
+pedido -> notificacao: 4.2:notificar_por_id(id: int): boolean
+activate notificacao
+notificacao --> pedido
+deactivate notificacao
+
+deactivate pedido
+pedido --> cozinheiro
+deactivate pedido
+
+cozinheiro -> pedido: 5:atualizar_status(novo="Pronto"): boolean
+activate pedido
+pedido -> notificacao: 5.1:notificar_por_id(id: int): boolean
+activate notificacao
+notificacao --> pedido
+deactivate notificacao
+
+pedido --> cozinheiro
+deactivate pedido
+
+garcom -> pedido: 6:atualizar_status(novo="Entregue"): boolean
+activate pedido
+pedido --> garcom
+deactivate pedido
+
+@enduml

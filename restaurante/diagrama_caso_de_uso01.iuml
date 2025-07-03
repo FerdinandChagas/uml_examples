@@ -1,0 +1,29 @@
+@startuml
+left to right direction
+
+actor Gerente as gerente
+actor Garçom as garcom
+actor Cozinheiro as cozinheiro
+
+rectangle "Sistema Restaurante"{
+    (Realizar Pedido) as realizar_pedido
+    (Visualizar Pedidos) as visualizar_pedidos
+    (Realizar Pagamento) as registrar_pagamento
+    (Atualizar Pedido) as atualizar_pedido
+    (Finalizar Pedido) as finalizar_pedido
+    (Abrir Caixa) as abrir_caixa
+    (Fechar Caixa) as fechar_caixa
+}
+
+garcom -- realizar_pedido
+garcom -- registrar_pagamento
+garcom -- visualizar_pedidos
+
+cozinheiro -- visualizar_pedidos
+cozinheiro -- atualizar_pedido
+cozinheiro -- finalizar_pedido
+gerente -- abrir_caixa
+gerente -- fechar_caixa
+
+@enduml
+

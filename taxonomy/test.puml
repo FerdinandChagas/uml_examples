@@ -1,0 +1,150 @@
+@startuml
+!theme toy
+
+' Nó Central
+rectangle "GenAI no Apoio a Estudantes Neurodivergentes (K-12)" as GenAICentral #LightBlue
+
+' I. Papéis/Funções Primárias da GenAI
+package "I. Papéis/Funções Primárias da GenAI" as FuncoesPrimarias #AliceBlue {
+    node "GenAI como Tutor" as TutorGenAI
+    TutorGenAI --> "Fornece instrução consistente e paciente sem pressão social [1]" as InstrConsistente
+    TutorGenAI --> "Oferece feedback em tempo real e dinâmico [1, 2]" as FeedbackRealTime
+    TutorGenAI --> "Exemplo: Chatbots (Pepper, ARELE-bot) [3, 4]" as ExPepperArele
+
+    node "GenAI como Aluno/Parceiro de Aprendizagem" as AlunoParceiroGenAI
+    AlunoParceiroGenAI --> "Permite que os estudantes pratiquem a explicação de conceitos [1]" as PraticaExplicacao
+    AlunoParceiroGenAI --> "Reduz a ansiedade social associada à interação humana [1, 5]" as ReduzAnsiedadeSocial
+
+    node "GenAI como Ferramenta/Recurso" as FerramentaRecursoGenAI
+    FerramentaRecursoGenAI --> "Apoia: Criação de materiais de aprendizagem personalizados e adaptados [6]" as CriaMatPersonalizados
+    FerramentaRecursoGenAI --> "Apoia: Geração de Planos de Educação Individualizados (IEPs) [6-10]" as GeraIEPs
+    FerramentaRecursoGenAI --> "Apoia: Suporte administrativo para educadores [7, 8, 11]" as SuporteAdmEducadores
+    FerramentaRecursoGenAI --> "Apoia: Ferramentas de escrita e organização (ex: LaMPost) [12-14]" as FerramentaEscritaOrg
+}
+
+' II. Áreas de Aplicação na Educação
+package "II. Áreas de Aplicação na Educação" as AplicacoesEducacao #LightCyan {
+    node "Apoio à Aprendizagem e Instrução Personalizada" as AprendizagemPersonalizadaApp
+    node "Avaliação e Feedback" as AvaliacaoFeedbackApp
+    node "Apoio Administrativo para Educadores" as ApoioAdmEducadoresApp
+    node "Desenvolvimento de Habilidades Socioemocionais e Comunicação" as HabilidadesSocioemocionaisApp
+    node "Criação de Conteúdo e Materiais Didáticos" as CriacaoConteudoApp
+}
+
+' III. Condições Neurodivergentes Alvo
+package "III. Condições Neurodivergentes Alvo" as CondicoesAlvo #Lavender {
+    node "Transtorno do Espectro Autista (TEA)" as TEA_Cond
+    node "Transtorno do Déficit de Atenção e Hiperatividade (TDAH)" as TDAH_Cond
+    node "Dislexia/Disgrafia/Discalculia" as Dislexia_Cond
+    node "Altas Habilidades/Superdotação e Dupla Excepcionalidade" as AltasHabilidades_Cond
+    node "Neurodiversidade em Geral" as NeurodiversidadeGeral_Cond
+}
+
+' IV. Benefícios e Potencial Documentados
+package "IV. Benefícios e Potencial Documentados" as BeneficiosDoc #LightGreen {
+    node "Suporte personalizado e em tempo real [7]" as SuportePersoRealTime
+    node "Redução da carga administrativa para educadores [7]" as ReducaoCargaAdmBenef
+    node "Aumento do engajamento e compreensão do estudante [15, 16]" as AumentoEngajamentoComp
+    node "Melhora nas habilidades de comunicação e sociais [3, 5]" as MelhoraComunicacaoSocial
+    node "Fomento do pensamento crítico e resolução de problemas [17, 18]" as FomentoPensamentoCritico
+    node "Promoção da autonomia e empoderamento [16]" as PromocaoAutonomiaEmp
+    node "Flexibilidade e acessibilidade [19]" as FlexibilidadeAcessibilidadeBenef
+}
+
+' V. Desafios e Preocupações Críticas
+package "V. Desafios e Preocupações Críticas" as DesafiosCriticos #LightCoral {
+    node "Precisão e confiabilidade da informação [7, 20]" as PrecisaoConfiabInfo
+    node "Potencial de excesso de dependência da IA [7, 20, 21]" as ExcessoDependenciaIA
+    node "Privacidade e segurança dos dados [7, 21-23]" as PrivacidadeSegurancaDados
+    node "Biais e considerações culturais [24-26]" as BiaisConsideracoesCulturais
+    node "Falta de orientação prática e implementação detalhada [27-29]" as FaltaOrientacaoImplementacao
+    node "Calibração desenvolvimental inadequada [30]" as CalibracaoInadequada
+    node "Sobrecarga cognitiva [30, 31]" as SobrecargaCognitiva
+    node "Custos e acessibilidade [25, 32-34]" as CustosAcessibilidadeDesaf
+    node "Necessidade de supervisão e julgamento humano [7, 10, 35-39]" as NecessidadeSupervisaoHumana
+    node "Falta de treinamento e desenvolvimento profissional para educadores [7, 40-43]" as FaltaTreinamentoProfEducadores
+    node "Risco de plágio [20]" as RiscoPlagio
+    node "Falta de envolvimento de pessoas neurodivergentes no desenvolvimento da IA [43-46]" as FaltaEnvolvimentoNeuroDev
+}
+
+' VI. Lacunas Críticas e Direções Futuras de Pesquisa
+package "VI. Lacunas Críticas e Direções Futuras de Pesquisa" as LacunasFuturas #LightSteelBlue {
+    node "Pesquisa empírica rigorosa [7, 47, 48]" as PesquisaEmpiricaRigorosa
+    node "Distinção na personalização [27, 48]" as DistincaoPersonalizacao
+    node "Guia de implementação [28, 29]" as GuiaImplementacao
+    node "Estratégias de prompt específicas [29]" as EstrategiasPromptEspecificas
+    node "Avaliação das percepções (educadores/alunos) [47, 48]" as AvaliacaoPercepcoes
+    node "Impacto de longo prazo [44, 49-51]" as ImpactoLongoPrazo
+    node "Desenvolvimento de ferramentas inclusivas (design participativo) [43, 44, 46]" as FerramentasInclusivasDesignParticipativo
+    node "Modelos teóricos e frameworks [47, 48]" as ModelosTeoricosFrameworks
+    node "Integração com sistemas de aprendizagem adaptativa [52, 53]" as IntegracaoSistemasAprendizagemAdaptativa
+    node "Aplicações interdisciplinares [52, 53]" as AplicacoesInterdisciplinares
+}
+
+' Relações Primárias do Nó Central para as Categorias Principais
+GenAICentral -- "É Categorizado por" --> FuncoesPrimarias
+GenAICentral -- "Tem Aplicações em" --> AplicacoesEducacao
+GenAICentral -- "Alvo para" --> CondicoesAlvo
+GenAICentral -- "Oferece" --> BeneficiosDoc
+GenAICentral -- "Enfrenta" --> DesafiosCriticos
+GenAICentral -- "Demanda" --> LacunasFuturas
+
+' Relações Internas das Categorias Principais para seus Sub-Nós
+FuncoesPrimarias --> TutorGenAI
+FuncoesPrimarias --> AlunoParceiroGenAI
+FuncoesPrimarias --> FerramentaRecursoGenAI
+
+AplicacoesEducacao --> AprendizagemPersonalizadaApp
+AplicacoesEducacao --> AvaliacaoFeedbackApp
+AplicacoesEducacao --> ApoioAdmEducadoresApp
+AplicacoesEducacao --> HabilidadesSocioemocionaisApp
+AplicacoesEducacao --> CriacaoConteudoApp
+
+CondicoesAlvo --> TEA_Cond
+CondicoesAlvo --> TDAH_Cond
+CondicoesAlvo --> Dislexia_Cond
+CondicoesAlvo --> AltasHabilidades_Cond
+CondicoesAlvo --> NeurodiversidadeGeral_Cond
+
+BeneficiosDoc --> SuportePersoRealTime
+BeneficiosDoc --> ReducaoCargaAdmBenef
+BeneficiosDoc --> AumentoEngajamentoComp
+BeneficiosDoc --> MelhoraComunicacaoSocial
+BeneficiosDoc --> FomentoPensamentoCritico
+BeneficiosDoc --> PromocaoAutonomiaEmp
+BeneficiosDoc --> FlexibilidadeAcessibilidadeBenef
+
+DesafiosCriticos --> PrecisaoConfiabInfo
+DesafiosCriticos --> ExcessoDependenciaIA
+DesafiosCriticos --> PrivacidadeSegurancaDados
+DesafiosCriticos --> BiaisConsideracoesCulturais
+DesafiosCriticos --> FaltaOrientacaoImplementacao
+DesafiosCriticos --> CalibracaoInadequada
+DesafiosCriticos --> SobrecargaCognitiva
+DesafiosCriticos --> CustosAcessibilidadeDesaf
+DesafiosCriticos --> NecessidadeSupervisaoHumana
+DesafiosCriticos --> FaltaTreinamentoProfEducadores
+DesafiosCriticos --> RiscoPlagio
+DesafiosCriticos --> FaltaEnvolvimentoNeuroDev
+
+LacunasFuturas --> PesquisaEmpiricaRigorosa
+LacunasFuturas --> DistincaoPersonalizacao
+LacunasFuturas --> GuiaImplementacao
+LacunasFuturas --> EstrategiasPromptEspecificas
+LacunasFuturas --> AvaliacaoPercepcoes
+LacunasFuturas --> ImpactoLongoPrazo
+LacunasFuturas --> FerramentasInclusivasDesignParticipativo
+LacunasFuturas --> ModelosTeoricosFrameworks
+LacunasFuturas --> IntegracaoSistemasAprendizagemAdaptativa
+LacunasFuturas --> AplicacoesInterdisciplinares
+
+' Relações Transversais e de Impacto
+DesafiosCriticos -- "Impactam / Limitam" --> BeneficiosDoc
+DesafiosCriticos -- "Geram a Necessidade de" --> LacunasFuturas
+CondicoesAlvo -- "Influenciam a Adaptação de" --> FuncoesPrimarias
+CondicoesAlvo -- "Influenciam a Adaptação de" --> AplicacoesEducacao
+LacunasFuturas -- "Visam Mitigar" --> DesafiosCriticos
+ApoioAdmEducadoresApp -- "Impacta Positivamente" --> ReducaoCargaAdmBenef
+TutorGenAI -- "Gera" --> AumentoEngajamentoComp
+
+@enduml
