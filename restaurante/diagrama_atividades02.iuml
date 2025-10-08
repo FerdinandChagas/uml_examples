@@ -1,0 +1,22 @@
+@startuml
+
+start
+    :valor_total=pedido.valor_total();
+    :Selecionar Tipo Pagamento;
+    if () then ([pix])
+        :Gerar QR code;
+        :Exibir QR code;
+    else ([cartão])
+        :Informar Cartão;
+    endif
+    fork
+        :Solicitar Pagamento;
+    fork again
+        :Processar Pagamento;
+        :Gerar Recibo;
+    endfork
+    :Confirmar Pagamento;
+    :Atualizar Caixa;
+stop
+
+@enduml

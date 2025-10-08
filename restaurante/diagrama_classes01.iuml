@@ -81,6 +81,6 @@ Funcionario "1"--"1" Pedido: registra >
 Pedido o-left- Item
 Caixa "1..*"--"*" Pedido: lista >
 Pedido "1"-right-"*" Notificacao: gera >
-Pagamento -- Pedido
+Pagamento "1"--"1" Pedido: possui >
 
 @enduml

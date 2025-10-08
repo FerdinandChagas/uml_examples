@@ -1,0 +1,28 @@
+@startuml "Diagrama de Estados (Pedido)"
+hide empty description
+left to right direction
+
+state "Em Preparo" as em_preparo
+state "Pronto" as pronto
+state "Aguardando Itens" as aguardando_itens
+state "Cancelado" as cancelado
+state "Pendente" as pendente
+state "Entregue" as entregue
+state "Finalizado" as finalizado
+
+[*]-right-> aguardando_itens
+aguardando_itens --> pendente: Realizar pedido(itens)[itens>0]/ realizar_pedido(itens)
+pendente --> cancelado: Cancelar pedido
+pendente --> em_preparo: Iniciar preparo
+pendente --> aguardando_itens: Modificar pedido
+em_preparo --> pronto: Terminou o preparo
+em_preparo --> cancelado: Faltou insumos
+pronto --> entregue: Levou para mesa
+entregue --> finalizado: Encerrou o pedido
+finalizado --> [*]
+
+
+
+cancelado --> finalizado: Cliente desistiu
+cancelado --> aguardando_itens
+@enduml

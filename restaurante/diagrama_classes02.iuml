@@ -1,0 +1,116 @@
+@startuml
+title Diagrama de Classes - Sistema de Gerenciamento de Restaurantes (com Operações)
+
+class Restaurante {
+  - nome: String
+  - cnpj: String
+  - endereco: String
+  - telefone: String
+  + cadastrarMesa(): void
+  + atualizarDados(): void
+}
+
+class Mesa {
+  - numero: int
+  - capacidade: int
+  - status: String
+  + reservar(): void
+  + liberar(): void
+  + ocupar(): void
+}
+
+class Cliente {
+  - nome: String
+  - telefone: String
+  - email: String
+  + fazerReserva(): Reserva
+  + fazerPedido(): Pedido
+}
+
+class Reserva {
+  - dataHora: DateTime
+  - qtdPessoas: int
+  - status: String
+  + confirmar(): void
+  + cancelar(): void
+}
+
+class Pedido {
+  - numero: int
+  - dataHora: DateTime
+  - status: String
+  - observacoes: String
+  + adicionarItem(produto: Produto, qtd: int): void
+  + removerItem(produto: Produto): void
+  + calcularTotal(): float
+  + atualizarStatus(novoStatus: String): void
+}
+
+class ItemPedido {
+  - quantidade: int
+  - observacoes: String
+  + calcularSubtotal(): float
+}
+
+class Produto {
+  - nome: String
+  - descricao: String
+  - preco: float
+  - categoria: String
+  - disponivel: boolean
+  + marcarIndisponivel(): void
+  + atualizarPreco(novoPreco: float): void
+}
+
+class Estoque {
+  - quantidade: int
+  - alertaMinimo: int
+  + atualizarQuantidade(qtd: int): void
+  + verificarDisponibilidade(): boolean
+  + emitirAlerta(): void
+}
+
+class Ingrediente {
+  - nome: String
+  - unidade: String
+  + associarAoProduto(produto: Produto): void
+}
+
+class Usuario {
+  - nome: String
+  - login: String
+  - senha: String
+  - perfil: String
+  + autenticar(senha: String): boolean
+  + registrarOperacao(): void
+}
+
+class Pagamento {
+  - valor: float
+  - metodo: String
+  - dataHora: DateTime
+  + processar(): boolean
+}
+
+class Relatorio {
+  + gerarVendas(): void
+  + gerarEstoque(): void
+  + gerarDesempenho(): void
+}
+
+' Relacionamentos
+Restaurante "1" -- "0..*" Mesa
+Mesa "0..1" -- "0..*" Pedido
+Pedido "1" -- "1..*" ItemPedido
+ItemPedido "1" -- "1" Produto
+Produto "1" -- "0..*" Ingrediente
+Ingrediente "1" -- "1" Estoque
+
+Pedido "0..1" -- "1" Cliente
+Pedido "0..1" -- "1" Pagamento
+Reserva "1" -- "1" Cliente
+Reserva "1" -- "1" Mesa
+
+Usuario "1" -- "0..*" Pedido
+
+@enduml

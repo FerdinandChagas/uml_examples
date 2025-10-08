@@ -1,0 +1,23 @@
+@startuml
+
+start
+:Selecionar Itens;
+:Verificar o Estoque;
+if (Possui estoque) then (sim)
+    fork 
+    :Registrar Pedido;
+    fork again
+    :Notificar Cozinha;
+    end fork
+else (não)
+    stop
+endif
+    while (Pedido em Preparo?) is ([Em preparo])
+        :Verificar Pedido;
+    endwhile ([Pronto])
+    :Pedido Pronto;
+    :Notificar Garçom;
+    :Confirmar Entrega;
+stop
+
+@enduml
