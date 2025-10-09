@@ -1,0 +1,47 @@
+@startuml
+hide footbox
+
+actor "Cliente" as cliente
+
+cliente -> AppBank: 1: realizar_pagamento(codigo: String): Comprovante
+activate AppBank
+
+AppBank -> Pagamento: 1.1:pagar_boleto(codigo: String): Comprovante
+activate Pagamento
+
+Pagamento -> CentralBoletos: 1.1.1: valor = validar_boleto(codigo: String): float
+activate CentralBoletos
+
+CentralBoletos --> Pagamento: valor, "boleto válido" 
+deactivate CentralBoletos
+
+Pagamento -> Conta: 1.1.2: verificar_saldo(valor: float): boolean
+activate Conta
+
+Conta --> Pagamento: saldo suficiente
+
+Pagamento -> Conta: 1.1.3: atualizar_saldo(valor: float): boolean
+
+Conta -> Conta: 1.1.3.1: atualizar_extrato(transacao: String)
+activate Conta
+deactivate Conta
+
+Conta --> Pagamento: saldo atualizado
+deactivate Conta
+
+Pagamento -> CentralBoletos: 1.1.4: realizar_transação(conta_origem: String, conta_destino: String, valor: float)
+activate CentralBoletos
+
+CentralBoletos --> Pagamento: comprovante
+deactivate CentralBoletos
+
+Pagamento -> Notificacoes: 1.1.5: enviar_notificacao(cliente: Cliente, msg: String)
+activate Notificacoes
+
+Pagamento --> AppBank: comprovante
+deactivate Pagamento
+
+AppBank --> cliente: comprovante
+deactivate AppBank
+
+@enduml
