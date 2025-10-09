@@ -1,0 +1,47 @@
+@startuml
+hide footbox
+
+actor "Cliente" as cliente
+
+cliente -> AppBank: realizar_pix(chave: String, valor: float): Comprovante
+activate AppBank
+
+AppBank -> Pix: fazer_pix(chave: String, valor: float): Comprovante
+activate Pix
+
+Pix -> CentralPix: validar_chave(chave: String): boolean
+activate CentralPix
+
+CentralPix --> Pix: chave validada 
+deactivate CentralPix
+
+Pix -> Conta: verificar_saldo(valor: float): boolean
+activate Conta
+
+Conta --> Pix: saldo suficiente
+
+Pix -> Conta: atualizar_saldo(valor: float): boolean
+
+Conta -> Conta: atualizar_extrato(transacao: String)
+activate Conta
+deactivate Conta
+
+Conta --> Pix: saldo atualizado
+deactivate Conta
+
+Pix -> CentralPix: realizar_transação(chave_origem: String, chave_destino: String, valor: float)
+activate CentralPix
+
+CentralPix --> Pix: comprovante
+deactivate CentralPix
+
+Pix -> Notificacoes: enviar_notificacao(cliente: Cliente, msg: String)
+activate Notificacoes
+
+Pix --> AppBank: comprovante
+deactivate Pix
+
+AppBank --> cliente: comprovante
+deactivate AppBank
+
+@enduml
