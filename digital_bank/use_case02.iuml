@@ -1,0 +1,20 @@
+@startuml
+left to right direction
+
+actor Cliente as cliente
+
+rectangle "Uso da Conta"{
+    (Fazer Pix) as fazer_pix
+    (Fazer Pagamento) as fazer_pagamento
+    (Consultar Saldo) as consultar_saldo
+    (Visualizar Extrato) as visualizar_extrato
+    (Visualizar Notificações) as visualizar_notificacoes
+}
+
+cliente -- fazer_pix
+cliente -- fazer_pagamento
+cliente -- consultar_saldo
+cliente -- visualizar_extrato
+cliente -- visualizar_notificacoes
+
+@enduml

@@ -1,0 +1,20 @@
+@startuml
+left to right direction
+
+actor Cliente as cliente
+actor Gerente as gerente
+
+rectangle "Gerenciamento de Conta"{
+    (Criar Conta) as criar_conta
+    (Cancelar Conta) as cancelar_conta
+    (Fazer Login) as fazer_login
+    (Fazer Logout) as fazer_logout
+}
+
+cliente -- criar_conta
+cliente -- cancelar_conta
+cliente -- fazer_login
+cliente -- fazer_logout
+gerente -left-|> cliente
+
+@enduml

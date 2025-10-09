@@ -1,0 +1,18 @@
+@startuml
+left to right direction
+
+actor Cliente as cliente
+actor Gerente as gerente
+
+rectangle "Gerenciamento de Empréstimo"{
+    (Simular Empréstimo) as simular_emprestimo
+    (Contrar Empréstimo) as contratar_emprestimo
+    (Quitar Empréstimo) as quitar_emprestimo
+}
+
+cliente -- simular_emprestimo
+cliente -- contratar_emprestimo
+cliente -- quitar_emprestimo
+
+contratar_emprestimo -- gerente
+@enduml
