@@ -6,6 +6,7 @@ actor Cliente as cliente
 rectangle "Uso da Conta"{
     (Fazer Pix) as fazer_pix
     (Fazer Pagamento) as fazer_pagamento
+    (Fazer Depósito) as fazer_deposito
     (Consultar Saldo) as consultar_saldo
     (Visualizar Extrato) as visualizar_extrato
     (Visualizar Notificações) as visualizar_notificacoes
@@ -13,6 +14,7 @@ rectangle "Uso da Conta"{
 
 cliente -- fazer_pix
 cliente -- fazer_pagamento
+cliente -- fazer_deposito
 cliente -- consultar_saldo
 cliente -- visualizar_extrato
 cliente -- visualizar_notificacoes

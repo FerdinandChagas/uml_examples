@@ -1,0 +1,74 @@
+@startuml
+
+class Usuario{
+    id
+    nome
+    cpf
+    rg
+    endereco
+    email
+    telefone
+    status
+    notificacoes
+}
+
+class Cliente{
+    conta
+}
+
+class Gerente{
+    id
+    login
+    senha
+    nivel
+    tipo
+}
+
+class Conta{
+    numero
+    agencia
+    saldo
+    login
+    senha
+    extrato
+    status
+    pix
+    emprestimos
+    fazer_deposito()
+    consultar_saldo()
+    visualizar_extrato()
+}
+
+class Pix{
+    id
+    chaves_pix
+    fazer_pix()
+}
+
+class Emprestimo{
+    id
+    contrato
+    valor
+    parcelas
+    status
+    simular_emprestimo()
+    contratar_emprestimo()
+}
+
+class Pagamento{
+    id
+    data
+    valor
+    documento
+    fazer_pagamento()
+}
+
+Cliente -left-|> Usuario
+Gerente -up-|> Usuario
+
+Cliente -right- Conta: possui >
+Conta -up- Pix: possui >
+Conta -- Emprestimo: possui >
+Conta -right- Pagamento: possui >
+Gerente -right- Emprestimo: autoriza >
+@enduml
