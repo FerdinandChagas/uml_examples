@@ -1,0 +1,38 @@
+@startuml
+hide footbox
+actor "Usuário" as usuario
+
+usuario -> TelaTarefa: 1:enviar_cadastro()
+activate TelaTarefa
+
+TelaTarefa -> ControleTarefa: 1.1: cadastrar_tarefa(dados[], usuario)
+activate ControleTarefa
+
+ControleTarefa -> ControleUsuario: 1.1.1: buscar_usuario(usuario)
+activate ControleUsuario
+
+ControleUsuario -> BD
+activate BD
+
+BD --> ControleUsuario
+deactivate BD
+
+ControleUsuario --> ControleTarefa
+deactivate ControleUsuario
+
+ControleTarefa -> BD
+activate BD
+
+BD --> ControleTarefa
+deactivate BD
+
+create Tarefa
+ControleTarefa -> Tarefa: <<create>>
+
+ControleTarefa --> TelaTarefa
+deactivate ControleTarefa
+
+TelaTarefa --> usuario
+deactivate TelaTarefa
+
+@enduml

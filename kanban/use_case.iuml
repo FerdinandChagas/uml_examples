@@ -1,0 +1,28 @@
+@startuml
+left to right direction
+
+actor "Usuário" as usuario
+
+rectangle {
+
+(Cadastrar Tarefa) as cadastrar_tarefa
+(Atualizar Tarefa) as atualizar_tarefa
+(Listar Tarefas) as listar_tarefas
+(Buscar Tarefa) as buscar_tarefa
+(Atribuir Tarefa) as atribuir_tarefa
+(Visualizar Notificações) as visualizar_notificacoes
+}
+
+
+usuario -- cadastrar_tarefa
+usuario -- listar_tarefas
+usuario -- visualizar_notificacoes
+usuario -- buscar_tarefa
+
+listar_tarefas <. atualizar_tarefa: <<extend>>
+buscar_tarefa <. atualizar_tarefa: <<extend>>
+
+atribuir_tarefa .> listar_tarefas: <<extend>>
+atribuir_tarefa .> buscar_tarefa: <<extend>>
+
+@enduml

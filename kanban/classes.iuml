@@ -1,0 +1,44 @@
+@startuml
+left to right direction
+
+class Usuario{
+    id
+    nome
+    login
+    senha
+    email
+    cadastrar_usuario()
+    listar_usuarios()
+    buscar_usuario(usuario)
+    atualizar_usuario()
+    remover_usuario()
+    realizar_login()
+    realizar_logout()
+}
+
+class Tarefa{
+    -titulo: String
+    -descricao: String
+    -data_inicio: Date
+    -data_fim: Date
+    -status: String
+    -responsavel: Usuario
+    -comentarios: List<Comentario>
+    +cadastrar_tarefa(dados: List, usuario: Usuario): Tarefa
+    +atualizar_tarefa()
+    +remover_tarefa()
+    +listar_tarefas()
+    +buscar_tarefa()
+}
+
+class Comentario{
+    mensagem
+    data
+    usuario
+    cadastrar_comentario()
+}
+
+Usuario "1"--"1" Tarefa: possui <
+Tarefa "1..*"-left-"0..*" Comentario: possui >
+Comentario "1"--"1" Usuario: possui >
+@enduml
