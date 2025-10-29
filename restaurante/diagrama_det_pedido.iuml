@@ -1,6 +1,6 @@
 @startuml "Diagrama de Estados (Pedido)"
 hide empty description
-left to right direction
+
 
 state "Em Preparo" as em_preparo
 state "Pronto" as pronto

@@ -1,0 +1,21 @@
+@startuml "Modelo de Transição de Estados (Consulta)"
+hide empty description
+
+state "Agendada" as agendada
+state "Em Progresso" as em_progresso
+state "Adiada" as adiada
+state "Cancelada" as cancelada
+state "Finalizada" as finalizada
+
+[*]--> agendada: Agendamento
+agendada --> adiada: Adiar consulta
+agendada --> cancelada: Cancelar consulta
+agendada --> em_progresso: Realizar consulta
+adiada --> agendada: Reagendar consulta
+adiada --> cancelada: Cancelar consulta
+em_progresso --> finalizada: Finalizar consulta
+
+finalizada --> [*]
+cancelada --> [*]
+
+@enduml
