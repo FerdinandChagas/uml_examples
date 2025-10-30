@@ -1,0 +1,31 @@
+@startuml "Realizar Compras"
+
+start
+    repeat :aguardar itens;
+        :adicionar item;
+    repeat while (Continuar comprando?) is (sim)
+    -> não;
+    if (remove itens) then (sim)
+        :remover itens;
+    else (não)
+        :informar endereço;
+        :informar forma de pagamento;
+    endif
+    :confirmar compra;
+    fork
+        :notificar cliente;
+    fork again
+        :notificar estoque;
+    endfork
+    :confirmar pagamento;
+    fork 
+        :notificar cliente;
+    fork again
+        :notificar epacotamento;
+        :empacotar produtos;
+    endfork
+    :notificar transportadora;
+    :transportadora recebeu produtos;
+    :notificar cliente;
+stop
+@enduml
