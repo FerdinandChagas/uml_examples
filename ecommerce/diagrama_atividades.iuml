@@ -27,5 +27,6 @@ start
     :notificar transportadora;
     :transportadora recebeu produtos;
     :notificar cliente;
+    :finalizar processo;
 stop
 @enduml
